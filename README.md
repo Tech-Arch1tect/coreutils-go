@@ -4,10 +4,21 @@ It is just a project used to learn more Go, learn more about coreutils, etc. The
 
 ## Status
 
-Done nothing yet!
+0 passing tests
+
+```
+Total tests:    658
+Passed:         0
+Skipped:        596
+Expected fail:  0
+Unexpected pass:0
+Failures:       62
+Errors:         0
+```
 
 ## Goals
 
-- Create initial (empty) `cp` program
-- Create a way to re-use GNU coreutils tests with our example binary
+- ~~Create initial (empty) `cp` program~~
+- ~~Create a way to re-use GNU coreutils tests with our example binary~~
 - Start actualy implementing coreutils
+- Create CI for automated testing / tracking # of tests
