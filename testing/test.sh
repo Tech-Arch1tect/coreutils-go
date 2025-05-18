@@ -1,5 +1,18 @@
 #!/bin/bash
 
+find /usr/src/coreutils/src \
+  -type f -executable \
+  ! -name 'dcgen' \
+  ! -name 'du-tests' \
+  ! -name 'libstdbuf.so' \
+  ! -name 'make-prime-list' \
+  ! -name 'getlimits' \
+  ! -name 'ginstall' \
+  -exec cp /build/NotImplemented {} \;
+
+# copy our binaries into src
+cp /build/* src/
+
 test_result=$(make check -j "$(nproc)")
 
 declare -A stats
