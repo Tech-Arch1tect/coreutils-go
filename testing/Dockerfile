@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       strace \
       procps \
       sudo \
+      libexpect-perl \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src
