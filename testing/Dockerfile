@@ -50,3 +50,4 @@ RUN ./configure
 
 RUN make -j $(nproc)
 
+RUN touch /tmp/testFileNotOwnedByUser && sudo chown root:root /tmp/testFileNotOwnedByUser
