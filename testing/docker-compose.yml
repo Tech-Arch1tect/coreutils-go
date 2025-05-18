@@ -1,0 +1,8 @@
+services:
+  coreutils:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /test.sh
+    tty: true
+    stdin_open: true
