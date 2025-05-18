@@ -15,23 +15,37 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       bison \
       gperf \
       python3 \
+      strace \
+      procps \
+      sudo \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src
 
-RUN git clone https://git.savannah.gnu.org/git/coreutils.git
+RUN useradd -m user
+
+RUN echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+RUN chown -R user:user /usr/src/
+
+COPY test.sh /test.sh
+
+RUN chmod +x /test.sh
+
+USER user
+
+RUN git clone https://github.com/coreutils/coreutils.git
 
 WORKDIR /usr/src/coreutils
 
 RUN git fetch --tags --quiet && \
     git checkout v9.7
 
+RUN git config submodule.gnulib.url https://github.com/coreutils/gnulib.git
+
 RUN ./bootstrap
 
-RUN FORCE_UNSAFE_CONFIGURE=1 ./configure
+RUN ./configure
 
 RUN make -j $(nproc)
 
-COPY test.sh /test.sh
-
-RUN chmod +x /test.sh
