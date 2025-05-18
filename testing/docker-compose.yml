@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ../build:/build
     command: /test.sh
     tty: true
     stdin_open: true
