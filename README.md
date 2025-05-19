@@ -4,15 +4,15 @@ It is just a project used to learn more Go, learn more about coreutils, etc. The
 
 ## Status
 
-3 passing test(s)
+7 passing test(s)
 
 ```
 Total tests:    658
-Passed:         3
+Passed:         7
 Skipped:        596
 Expected fail:  0
 Unexpected pass:0
-Failures:       59
+Failures:       55
 Errors:         0
 ```
 
