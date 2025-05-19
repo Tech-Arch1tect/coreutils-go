@@ -52,3 +52,6 @@ echo "Expected fail:  $XFAIL"
 echo "Unexpected pass:$XPASS"
 echo "Failures:       $FAIL"
 echo "Errors:         $ERROR"
+
+cp ./tests/test-suite.log /build/test-suite.log
+echo "test-suite.log copied to /build/test-suite.log"
