@@ -1,9 +1,11 @@
 #!/bin/bash
+echo "fixing permissions"
 sudo find /usr/src/coreutils/ \
   \( ! -user user -o ! -group user \) \
   -exec chown user:user {} +
+echo "fixing permissions done"
 
-
+echo "copying not implemented binaries"
 find /usr/src/coreutils/build/src \
   -type f -executable \
   ! -name 'dcgen' \
@@ -13,14 +15,20 @@ find /usr/src/coreutils/build/src \
   ! -name 'getlimits' \
   ! -name 'ginstall' \
   -exec cp /build/NotImplemented {} \;
+echo "copying not implemented binaries done"
 
-# copy our binaries into src
+echo "copying our binaries into src"
 cp /build/* src/
+echo "copying our binaries into src done"
 
+echo "copying build files into tmpfs"
 cp -r /usr/src/coreutils/build/* /usr/src/coreutils/tmpfs/
 cd /usr/src/coreutils/tmpfs
+echo "copying build files into tmpfs done"
 
+echo "running tests"
 test_result=$(make check -j "$(nproc)")
+echo "running tests done"
 
 declare -A stats
 while read -r _ label count; do
