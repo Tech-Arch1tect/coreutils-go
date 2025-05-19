@@ -8,11 +8,11 @@ It is just a project used to learn more Go, learn more about coreutils, etc. The
 
 ```
 Total tests:    658
-Passed:         0
+Passed:         1
 Skipped:        596
 Expected fail:  0
 Unexpected pass:0
-Failures:       62
+Failures:       61
 Errors:         0
 ```
 
