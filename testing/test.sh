@@ -27,7 +27,11 @@ cd /usr/src/coreutils/tmpfs
 echo "copying build files into tmpfs done"
 
 echo "running tests"
-test_result=$(make check -j "$(nproc)")
+if [ -n "$TESTS" ]; then
+  test_result=$(make check -j "$(nproc)" TESTS=$TESTS)
+else
+  test_result=$(make check -j "$(nproc)")
+fi
 echo "running tests done"
 
 declare -A stats
