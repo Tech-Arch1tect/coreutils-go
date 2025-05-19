@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../build:/build
+    tmpfs:
+      - /usr/src/coreutils/tmpfs
     command: /test.sh
     tty: true
     stdin_open: true

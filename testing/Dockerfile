@@ -29,10 +29,6 @@ RUN echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN chown -R user:user /usr/src/
 
-COPY test.sh /test.sh
-
-RUN chmod +x /test.sh
-
 USER user
 
 RUN git clone https://github.com/coreutils/coreutils.git
@@ -46,8 +42,20 @@ RUN git config submodule.gnulib.url https://github.com/coreutils/gnulib.git
 
 RUN ./bootstrap
 
-RUN ./configure
+RUN mkdir -p /usr/src/coreutils/build
 
-RUN make -j $(nproc)
+WORKDIR /usr/src/coreutils/build
+
+RUN ../configure
 
 RUN touch /tmp/testFileNotOwnedByUser && sudo chown root:root /tmp/testFileNotOwnedByUser
+
+USER root
+
+COPY test.sh /test.sh
+
+RUN chmod +x /test.sh
+
+USER user
+
+RUN make -j $(nproc)

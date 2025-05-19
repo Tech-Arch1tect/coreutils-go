@@ -1,6 +1,10 @@
 #!/bin/bash
+sudo find /usr/src/coreutils/ \
+  \( ! -user user -o ! -group user \) \
+  -exec chown user:user {} +
 
-find /usr/src/coreutils/src \
+
+find /usr/src/coreutils/build/src \
   -type f -executable \
   ! -name 'dcgen' \
   ! -name 'du-tests' \
@@ -12,6 +16,9 @@ find /usr/src/coreutils/src \
 
 # copy our binaries into src
 cp /build/* src/
+
+cp -r /usr/src/coreutils/build/* /usr/src/coreutils/tmpfs/
+cd /usr/src/coreutils/tmpfs
 
 test_result=$(make check -j "$(nproc)")
 
@@ -28,6 +35,7 @@ XFAIL=${stats[XFAIL]}
 FAIL=${stats[FAIL]}
 XPASS=${stats[XPASS]}
 ERROR=${stats[ERROR]}
+
 
 echo "Total tests:    $TOTAL"
 echo "Passed:         $PASS"
