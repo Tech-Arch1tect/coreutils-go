@@ -50,6 +50,8 @@ RUN ../configure
 
 RUN touch /tmp/testFileNotOwnedByUser && sudo chown root:root /tmp/testFileNotOwnedByUser
 
+RUN make -j $(nproc)
+
 USER root
 
 COPY test.sh /test.sh
@@ -57,5 +59,3 @@ COPY test.sh /test.sh
 RUN chmod +x /test.sh
 
 USER user
-
-RUN make -j $(nproc)
